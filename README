@@ -1,0 +1,16 @@
+tightbellはplay frameworkを使ったミニブログのサンプルアプリです。
+http://tightbell.appspot.com/
+
+インストール方法/使い方など以下のwikiにアップします。
+http://wiki.github.com/k-nishijima/tightbell/
+
+実装は2010年1月16日に行われたGoogle App Engine for Java コードラボで作ったBlogアプリと、play frameworkのチュートリアルが元になっています。
+アイコンはOpen Icon Libraryから拝借しました。
+http://groups.google.com/group/google-app-engine-japan/msg/5111153c099ef93b?pli=1
+http://www.playframework.org/
+http://openiconlibrary.sourceforge.net/
+
+
+作者：西島　幸一郎
+http://k-nishijima.blogspot.com/
+http://twitter.com/k_nishijima
