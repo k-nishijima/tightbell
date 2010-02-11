@@ -1,0 +1,67 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+
+#{if frontPost}
+    <div class="post">
+        <h2 class="post-title">
+            <a href="@{Application.show(frontPost.id)}">${frontPost.title}</a>
+        </h2>
+        <div class="post-metadata">
+            #{if frontPost.author}
+            <span class="post-author">by ${frontPost.author.name}</span>
+            #{/if}
+            <span class="post-date">${frontPost.date.format('yyyy-MM-dd HH:mm')}</span>
+            <span class="post-comments">
+                &nbsp;|&nbsp;
+                ${frontPost.comments.size() ?: 'no'}
+                comment${frontPost.comments.size().pluralize()}</a>
+                #{if frontPost.comments}
+                    , latest by ${frontPost.comments[0].name}
+                #{/if}
+            </span>
+        </div>
+        <div class="post-content">
+            ${frontPost.content.nl2br()}
+        </div>
+    </div>
+
+    #{if olderPosts.size() > 0}
+        <div class="older-posts">
+            <h3>Older posts <span class="from">from this blog</span></h3>
+
+            #{list items:olderPosts, as:'oldPost'}
+                <div class="post">
+                    <h2 class="post-title">
+                        <a href="@{Application.show(oldPost.id)}">${oldPost.title}</a>
+                    </h2>
+                    <div class="post-metadata">
+                        #{if oldPost.author}
+                        <span class="post-author">
+                            by ${oldPost.author.name}
+                        </span>
+                        #{/if}
+                        <span class="post-date">
+                            ${oldPost.date.format('yyyy-MM-dd HH:mm')}
+                        </span>
+                        <div class="post-comments">
+                            ${oldPost.comments.size() ?: 'no'}
+                            comment${oldPost.comments.size().pluralize()}
+                            #{if oldPost.comments}
+                                - latest by ${oldPost.comments[0].name}
+                            #{/if}
+                        </div>
+                    </div>
+                </div>
+            #{/list}
+        </div>
+
+    #{/if}
+
+#{/if}
+
+#{else}
+    <div class="empty">
+        There is currently nothing to read here.
+    </div>
+#{/else}

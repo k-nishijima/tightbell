@@ -1,0 +1,18 @@
+<!-- Indices written at Thu, 11 Feb 2010 21:50:11 JST -->
+
+<datastore-indexes>
+
+    <!-- Used 15 times in query history -->
+    <datastore-index kind="Comment" ancestor="false" source="auto">
+        <property name="entryId" direction="asc"/>
+        <property name="visible" direction="asc"/>
+        <property name="date" direction="desc"/>
+    </datastore-index>
+
+    <!-- Used 2 times in query history -->
+    <datastore-index kind="Comment" ancestor="false" source="auto">
+        <property name="entryId" direction="asc"/>
+        <property name="date" direction="desc"/>
+    </datastore-index>
+
+</datastore-indexes>

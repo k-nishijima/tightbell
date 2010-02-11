@@ -1,0 +1,28 @@
+#{extends 'Admin/main.html' /}
+#{set title:'blogger list' /}
+
+#{ifErrors}
+    <ul>
+    #{errors}
+        <li>${error}</li>
+    #{/errors}
+    </ul>
+#{/ifErrors}
+
+    <form method="POST" action="@{Admin.editBlogger}">
+      <input type="hidden" name="id" value="${edit.id}" />
+      name : <input id="name" type="text" name="name" value="${edit.name}"/><br />
+      email : <input id="email" type="text" name="email" value="${edit.email}"/><br />
+      <input id="submit" type="image" src="/public/images/document-save-3.png" value="save" />
+    </form>
+
+<dl id="lists">
+#{list items:bloggers, as:'blogger'}
+    <dd>
+    	<a href="@{Admin.bloggers(blogger.id)}"><img src="/public/images/application_form_edit.png" border="0"></a>
+    	<a href="javascript:if(window.confirm('削除してもよろしいですか？')){ location.href='@{Admin.deleteBlogger(blogger.id)}' }"><img src="/public/images/button_cancel-3.png" border="0"></a>
+    	${blogger.email} / ${blogger.name}
+    </dd>
+#{/list}
+</dl>
+

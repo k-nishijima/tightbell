@@ -1,0 +1,6 @@
+# You can specialize this file for each language.
+
+validation.required=%s is required
+
+error.500=ブロガーとして登録されていません。管理者に連絡しブロガーとして登録してください。
+error.501=まず自分自身のメールアドレスをブロガーとして登録してください。

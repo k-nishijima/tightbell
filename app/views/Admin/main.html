@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+    <head>
+        <title>#{get 'title' /}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/main.css'}" />
+        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}" />
+        <script src="@{'/public/javascripts/jquery-1.4.min.js'}" type="text/javascript" charset="utf-8"></script>
+    </head>
+    <body>
+
+        <div id="header">
+            <div id="logo">
+                tightbell admin
+            </div>
+            <ul id="tools">
+                <li>
+                    <a href="/">home</a> /
+                    <a href="@{Application.logout}">logout</a>
+                </li>
+            </ul>
+            <div id="title">
+                <span class="about"></span>
+                <h1><a href="#">${blogTitle}</a></h1>
+
+                <table>
+                	<tr valign="top">
+                		<td><a href="@{Admin.index}">post</a></td>
+                		<td><a href="@{Admin.entries}">entries</a></td>
+                		<td><a href="@{Admin.bloggers}">bloggers</a></td>
+                	</tr>
+                </table>
+
+            </div>
+        </div>
+
+        <div id="main">
+            #{doLayout /}
+        </div>
+
+        <p id="footer">
+            built with the <a href="http://www.playframework.org">play framework</a> as a tutorial application
+            and
+            <a href="http://openiconlibrary.sourceforge.net">Open Icon Library</a>.
+        </p>
+
+    </body>
+</html>

@@ -1,0 +1,89 @@
+#{extends 'main.html' /}
+#{set title:entry.title /}
+
+<script type="text/javascript" charset="utf-8">
+    $(function() {
+        // Expose the form
+        $('form').click(function() {
+            $('form').expose({api: true}).load();
+        });
+
+        // If there is an error, focus to form
+        if($('form .error').size()) {
+            $('form').expose({api: true, loadSpeed: 0}).load();
+            $('form input').get(0).focus();
+        }
+    });
+</script>
+
+    <div class="post">
+        #{if flash.success}
+            <p class="success">${flash.success}</p>
+        #{/if}
+
+        <h2 class="post-title">
+            ${entry.title}
+        </h2>
+        <div class="post-metadata">
+            <span class="post-author">by ${entry.author.name}
+            #{if isBlogger == 'true' }
+            	[<a href="@{Admin.home(entry.id)}">edit</a>]
+            #{/if}
+            </span>
+            <span class="post-date">${entry.date.format('yyyy-MM-dd HH:mm')}</span>
+            <span class="post-comments">
+                &nbsp;|&nbsp;
+                ${entry.comments.size() ?: 'no'}
+                comment${entry.comments.size().pluralize()}</a>
+                #{if entry.comments}
+                    , latest by ${entry.comments[0].name}
+                #{/if}
+            </span>
+        </div>
+        <div class="post-content">
+            ${entry.content.nl2br()}
+        </div>
+    </div>
+
+
+    <div class="comments">
+        <h3>
+            ${entry.comments.size() ?: 'no'}
+            comment${entry.comments.size().pluralize()}
+        </h3>
+
+        #{list items:entry.comments, as:'comment'}
+            <div class="comment">
+                <div class="comment-metadata">
+                    <span class="comment-author">@${comment.name}</span>
+                    <span class="comment-date">
+                        ${comment.date.format('yyyy-MM-dd HH:mm')}
+                    </span>
+                </div>
+                <div class="comment-content">
+                    <div class="about">Detail: </div>
+                    ${comment.comment.escape().nl2br()}
+                </div>
+            </div>
+        #{/list}
+
+    </div>
+
+
+<h3>Post a comment</h3>
+
+#{form @Application.postComment(entry.id)}
+
+    <form method="POST" action="@{Application.postComment}">
+    #{ifErrors}
+        <p class="error">
+            All fields are required!
+        </p>
+    #{/ifErrors}
+
+      <input type="hidden" name="id" value="${entry.id}"/>
+      @<input id="name" type="text" name="name" size="20" value="${params.name}"/><br />
+      <textarea cols="40" rows="2" id="comment" name="comment" accesskey="u" autocomplete="off" tabindex="1">${params.content}</textarea><br />
+      <input id="submit" type="submit" value="comment" />
+    </form>
+#{/form}

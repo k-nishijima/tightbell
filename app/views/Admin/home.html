@@ -1,0 +1,56 @@
+#{extends 'Admin/main.html' /}
+#{set title:'blog post' /}
+
+#{ifErrors}
+    <ul>
+    #{errors}
+        <li>${error}</li>
+    #{/errors}
+    </ul>
+#{/ifErrors}
+
+    <form method="POST" action="@{Admin.editEntry}">
+      <input type="hidden" name="id" value="${edit.id}" />
+      Title:<br />
+      <input id="title" type="text" name="title" value="${edit.title}" size="20"/><br />
+      Content:<br />
+      <textarea id="content" cols="50" name="content" rows="10">${edit.content}</textarea><br />
+      <input id="submit" type="submit" value="post" />
+    </form>
+
+
+    <div class="comments">
+        <h3>
+            ${edit.adminComments.size() ?: 'no'}
+            comment${edit.comments.size().pluralize()}
+        </h3>
+
+        #{list items:edit.adminComments, as:'comment'}
+            <div class="comment">
+                <div class="comment-metadata">
+                    <span class="comment-author">
+                    <a href="@{Admin.updateComment(comment.id)}">
+                    #{if comment.visible}
+                        <img src="/public/images/accept.png" border="0">
+                    #{/if}
+                    #{else}
+                        <img src="/public/images/action_fail.png" border="0">
+                    #{/else}
+                    </a>
+                    @${comment.name}
+                    </span>
+                    <span class="comment-date">
+                        ${comment.date.format('yyyy-MM-dd HH:mm')}
+                    </span>
+                </div>
+                <div class="comment-content">
+                    <div class="about">Detail:
+                    </div>
+                    <a href="javascript:if(window.confirm('削除してもよろしいですか？')){ location.href='@{Admin.deleteComment(comment.id)}' }">
+                    <img src="/public/images/button_cancel-3.png" border="0"></a>
+                    ${comment.comment.escape().nl2br()}
+                </div>
+            </div>
+        #{/list}
+
+    </div>

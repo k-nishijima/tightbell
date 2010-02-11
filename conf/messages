@@ -1,0 +1,6 @@
+# You can specialize this file for each language.
+
+validation.required=%s is required
+
+error.500=I'm afraid you have not been registered as a blogger.  Please request the administrator to have you registered.
+error.501=Please have your email address registered as a blogger.
